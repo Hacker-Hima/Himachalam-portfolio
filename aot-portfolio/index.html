@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hima-portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Cinzel:wght@400;700;900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <!-- CRITICAL: Fallback visibility — overridden by GSAP when loaded, but ensures
+       contact section & all cards show on Live Server even if CDN is unavailable -->
+  <style>
+    .contact-card,
+    .contact-section .sec-header,
+    .open-signal,
+    .mission-card,
+    .medal-card,
+    .skill-card,
+    .skill-block,
+    .skills-section .sec-header,
+    .projects-section .sec-header,
+    .certs-section .sec-header,
+    .about-section .sec-header,
+    .id-card,
+    .field-report,
+    .wall-timeline,
+    .wt-node,
+    .combat-attr,
+    .wall-divider,
+    .footer {
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+
+    /* Inline SVG icons inside .cc-icon inherit the gold color */
+    .cc-icon svg {
+      color: var(--gold, #c8a84b);
+      fill: var(--gold, #c8a84b);
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+</head>
+
+<body>
+
+  <!-- ══ CURSOR ══ -->
+  <div class="custom-cursor" id="cursor"></div>
+  <div class="cursor-trail" id="cursorTrail"></div>
+
+  <!-- ══ NAVBAR ══ -->
+  <header class="navbar" id="navbar">
+    <div class="logo">
+      <svg class="wings-nav-svg" viewBox="0 0 70 36" xmlns="http://www.w3.org/2000/svg">
+        <path d="M35,18 C26,7 11,5 5,14 C13,10 24,15 32,21 C23,17 14,21 12,29 C19,23 30,22 34,27 Z" fill="#c8a84b" />
+        <path d="M35,18 C44,7 59,5 65,14 C57,10 46,15 38,21 C47,17 56,21 58,29 C51,23 40,22 36,27 Z" fill="#c8a84b" />
+        <circle cx="35" cy="20" r="3.5" fill="#c8a84b" />
+      </svg>
+      <span>HIMACHALAM's Portfolio </span>
+    </div>
+    <nav class="nav-links" id="navLinks">
+      <a href="#hero" data-text="BASE">HOME</a>
+      <a href="#about" data-text="DOSSIER">ABOUT</a>
+      <a href="#skills" data-text="ARSENAL">SKILLS</a>
+      <a href="#projects" data-text="MISSIONS">PROJECTS</a>
+      <a href="#certificates" data-text="MEDALS">ACHEIVEMENTS</a>
+      <a href="#contact" data-text="SIGNAL">CONTACT</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- ══ HERO ══ -->
+  <section id="hero" class="hero">
+    <canvas class="section-canvas" id="heroCanvas"></canvas>
+    <div class="hero-smoke-layer"></div>
+    <div class="scanline"></div>
+
+    <!-- Stamp overlays -->
+    <div class="stamp stamp-1">SURVEY CORPS<br>CLEARANCE: TITAN</div>
+    <div class="stamp stamp-2">⚔ CLASSIFIED ⚔</div>
+
+    <!-- ODM wire lines -->
+    <div class="odm-wires">
+      <div class="wire w1"></div>
+      <div class="wire w2"></div>
+      <div class="wire w3"></div>
+      <div class="wire w4"></div>
+    </div>
+
+    <!-- HUD panels -->
+    <div class="hud-panel hud-left">
+      <div class="hud-line" data-anim>RECRUIT ID: HC-2026</div>
+      <div class="hud-line" data-anim>REGIMENT: SURVEY CORPS</div>
+      <div class="hud-line" data-anim>STATUS: ██ ACTIVE</div>
+      <div class="hud-line" data-anim>CLEARANCE: LEVEL 7</div>
+      <div class="hud-line" data-anim>TARGET: SOFTWARE ENG.</div>
+    </div>
+    <div class="hud-panel hud-right">
+      <div class="hud-line">WALL: MARIA</div>
+      <div class="hud-line">LAT: 12.934N</div>
+      <div class="hud-line">LON: 79.983E</div>
+      <div class="hud-line">ODM GAS: ████ 100%</div>
+    </div>
+
+    <div class="hero-content">
+      <!-- LEFT -->
+      <div class="hero-left">
+        <div class="regiment-badge">
+          <svg viewBox="0 0 140 70" xmlns="http://www.w3.org/2000/svg" class="wings-hero">
+            <path d="M70,35 C52,15 22,10 10,25 C22,20 40,28 56,37 C40,30 24,37 20,50 C30,42 48,40 64,47 Z"
+              fill="#c8a84b" />
+            <path d="M70,35 C88,15 118,10 130,25 C118,20 100,28 84,37 C100,30 116,37 120,50 C110,42 92,40 76,47 Z"
+              fill="#c8a84b" />
+            <ellipse cx="70" cy="40" rx="9" ry="11" fill="#c8a84b" />
+            <text x="70" y="66" text-anchor="middle" font-family="'Cinzel',serif" font-size="5.5" fill="#c8a84b"
+              letter-spacing="3">WINGS OF FREEDOM</text>
+          </svg>
+        </div>
+
+        <div class="rank-eyebrow">⚔ &nbsp; COMPUTER SCIENCE & ENGINEERING STUDENT &nbsp; ⚔</div>
+
+        <h1 class="hero-name">
+          <span class="name-l1 glitch-text" data-text="HIMACHALAM">HIMACHALAM C</span>
+        </h1>
+
+        <div class="hero-title-row">
+          <span class="odm-cog">⚙</span>
+          <h2 class="hero-title"><span id="typing-text"></span><span class="cursor">█</span></h2>
+        </div>
+
+        <p class="hero-desc">
+          B.E. Computer Science & Engineering student at National Engineering College, Kovilpatti.
+          Passionate about software development, web technologies, and building practical applications that solve
+          real-world problems.
+        </p>
+
+        <div class="hero-stats">
+          <div class="stat-block">
+            <div class="stat-val counter" data-target="2">0</div>
+            <div class="stat-lbl">PROJECTS</div>
+          </div>
+          <div class="stat-sep">|</div>
+          <div class="stat-block">
+            <div class="stat-val counter" data-target="5">0</div>
+            <div class="stat-lbl">TECHNOLOGIES</div>
+          </div>
+          <div class="stat-sep">|</div>
+          <div class="stat-block">
+            <div class="stat-val">∞</div>
+            <div class="stat-lbl">LEARNING</div>
+          </div>
+        </div>
+
+        <div class="hero-btns">
+          <a href="#projects" class="btn-primary magnetic-btn">
+            <span class="btn-bg"></span>
+            <i class="fa-solid fa-crosshairs"></i> VIEW WORK
+          </a>
+          <a href="#contact" class="btn-secondary magnetic-btn">
+            <i class="fa-solid fa-satellite-dish"></i> CONNECT
+          </a>
+          <a href="assets/Hima resume.pdf" target="_blank" class="btn-ghost magnetic-btn">
+            <i class="fa-solid fa-scroll"></i> RESUME
+          </a>
+        </div>
+
+        <div class="hero-socials">
+          <a href="https://github.com/Hacker-Hima" target="_blank" class="soc-link" aria-label="GitHub">
+            <span class="soc-ripple"></span><i class="fa-brands fa-github"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/himachalam-c-535153327/" target="_blank" class="soc-link"
+            aria-label="LinkedIn">
+            <span class="soc-ripple"></span><i class="fa-brands fa-linkedin"></i>
+          </a>
+          <a href="mailto:himapc2007@gmail.com" class="soc-link" aria-label="Email">
+            <span class="soc-ripple"></span><i class="fa-solid fa-envelope"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- RIGHT: Profile -->
+      <div class="hero-right">
+        <div class="profile-outer" id="profileOuter">
+          <div class="titan-ring ring-1"></div>
+          <div class="titan-ring ring-2"></div>
+          <div class="titan-ring ring-3"></div>
+
+          <!-- ODM anchor hooks -->
+          <div class="hook hook-tl">
+            <div class="hook-wire"></div>
+            <div class="hook-gear">⚙</div>
+          </div>
+          <div class="hook hook-tr">
+            <div class="hook-wire"></div>
+            <div class="hook-gear">⚙</div>
+          </div>
+          <div class="hook hook-bl">
+            <div class="hook-gear">⚙</div>
+            <div class="hook-wire"></div>
+          </div>
+          <div class="hook hook-br">
+            <div class="hook-gear">⚙</div>
+            <div class="hook-wire"></div>
+          </div>
+
+          <div class="profile-frame">
+            <img src="images/hima.jpeg" alt="Himachalam C" class="profile-img">
+            <div class="profile-scan"></div>
+          </div>
+
+          <!-- Float badges -->
+          <div class="fbadge fb1">
+            <div class="fbadge-glow"></div>
+            <span>🌟</span>
+            <div>
+              <div class="fbl">CGPA</div>
+              <div class="fbv">7.61</div>
+            </div>
+          </div>
+          <div class="fbadge fb2">
+            <div class="fbadge-glow"></div>
+            <span>⚔</span>
+            <div>
+              <div class="fbl">FIELD</div>
+              <div class="fbv">CSE</div>
+            </div>
+          </div>
+          <div class="fbadge fb3">
+            <div class="fbadge-glow"></div>
+            <span>🏰</span>
+            <div>
+              <div class="fbl">CLG</div>
+              <div class="fbv">NEC</div>
+            </div>
+          </div>
+          <div class="fbadge fb4">
+            <div class="fbadge-glow"></div>
+            <span>☕</span>
+            <div>
+              <div class="fbl">PRIMARY</div>
+              <div class="fbv">JAVA</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="corps-motto">
+      <div class="motto-line"></div>
+      <span>✊ &nbsp; DEDICATE YOUR HEART &nbsp; ✊</span>
+      <div class="motto-line"></div>
+    </div>
+  </section>
+
+  <!-- ══ WALL DIVIDER ══ -->
+  <div class="wall-divider">
+    <div class="wd-inner"><span class="wd-text">— WALL ROSE —</span></div>
+  </div>
+
+  <!-- ══ ABOUT ══ -->
+  <section id="about" class="about-section">
+    <canvas class="section-canvas" id="aboutCanvas"></canvas>
+
+    <div class="sec-header">
+      <div class="sec-eyebrow">📜 DEVELOPER PROFILE</div>
+      <h2 class="sec-title">HIMACHALAM C</h2>
+    </div>
+
+    <div class="dossier-wrap">
+      <!-- ID Card -->
+      <div class="id-card" id="idCard">
+        <div class="id-top-bar">
+          <span class="id-corps-stamp">DEVELOPER PROFILE</span>
+          <span class="id-number">NEC-CSE</span>
+        </div>
+        <div class="id-photo-box">
+          <img src="images/hima.jpeg" alt="ID Photo" class="id-photo">
+          <div class="id-photo-scan"></div>
+        </div>
+        <div class="id-name-block">HIMACHALAM C</div>
+        <div class="id-rank-block">3RD YEAR CSE STUDENT SOFTWARE DEVELOPER</div>
+        <div class="id-divider"></div>
+        <div class="id-fields">
+          <div class="idf"><span class="idf-k">REGIMENT</span><span class="idf-v">CSE</span></div>
+          <div class="idf"><span class="idf-k">BASE</span><span class="idf-v">NEC-Kovilpatti</span></div>
+          <div class="idf"><span class="idf-k">ORIGIN</span><span class="idf-v">Gummidipoondi,TN</span></div>
+          <div class="idf"><span class="idf-k">CGPA</span><span class="idf-v gold">7.61 / 10</span></div>
+          <div class="idf"><span class="idf-k">STATUS</span><span class="idf-v green">● OPEN TO OPPORTUNITIES</span>
+          </div>
+        </div>
+        <div class="id-wing-foot">
+          <svg viewBox="0 0 80 35" xmlns="http://www.w3.org/2000/svg">
+            <path d="M40,17 C30,7 14,5 8,13 C15,10 25,14 32,19 C24,15 16,19 14,26 C20,21 30,20 37,24 Z" fill="#c8a84b"
+              opacity="0.6" />
+            <path d="M40,17 C50,7 66,5 72,13 C65,10 55,14 48,19 C56,15 64,19 66,26 C60,21 50,20 43,24 Z" fill="#c8a84b"
+              opacity="0.6" />
+          </svg>
+        </div>
+        <div class="id-hologram"></div>
+      </div>
+
+      <!-- Right narrative -->
+      <div class="dossier-body">
+        <div class="field-report">
+          <div class="fr-label">⚔ ABOUT ME ⚔</div>
+          <p>Computer Science and Engineering undergraduate at National Engineering College, Kovilpatti.</p>
+
+          <p>Passionate about software development, web technologies, and building practical applications that solve
+            real-world problems.
+
+            Currently focused on improving programming skills, developing projects, and preparing for opportunities in
+            the software industry.</p>
+        </div>
+
+        <!-- Education timeline -->
+        <div class="wall-timeline">
+          <div class="wt-head">📜 EDUCATION JOURNEY 📜</div>
+          <div class="wt-track">
+            <div class="wt-node">
+              <div class="wt-dot pulse-dot-gold"></div>
+              <div class="wt-connector"></div>
+              <div class="wt-info">
+                <div class="wt-title">B.E. — Computer Science &amp; Engineering</div>
+                <div class="wt-sub">National Engineering College, Kovilpatti</div>
+                <div class="wt-period">2024 – 2028 &nbsp;·&nbsp; CGPA: 7.61</div>
+              </div>
+            </div>
+            <div class="wt-node">
+              <div class="wt-dot pulse-dot-gold"></div>
+              <div class="wt-connector"></div>
+              <div class="wt-info">
+                <div class="wt-title">Higher Secondary (XII)</div>
+                <div class="wt-sub">GOVT HR SEC SCHOOL KVP</div>
+                <div class="wt-period">2024 • 77.33% • 143.5 CUTOFF</div>
+              </div>
+            </div>
+            <div class="wt-node wt-last">
+              <div class="wt-dot pulse-dot-gold"></div>
+              <div class="wt-connector"></div>
+              <div class="wt-info">
+                <div class="wt-title">Secondary (X)</div>
+                <div class="wt-sub">GOVT HIGH SCHOOL EGPM</div>
+                <div class="wt-period">2022 • 54.6%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Combat attrs -->
+        <div class="combat-grid">
+          <div class="combat-attr" data-pct="95">
+            <div class="ca-icon">🧠</div>
+            <div class="ca-name">Programming</div>
+            <div class="ca-bar-wrap">
+              <div class="ca-bar">
+                <div class="ca-fill"></div>
+              </div>
+            </div>
+            <div class="ca-val">90</div>
+          </div>
+          <div class="combat-attr" data-pct="88">
+            <div class="ca-icon">⚡</div>
+            <div class="ca-name">Development</div>
+            <div class="ca-bar-wrap">
+              <div class="ca-bar">
+                <div class="ca-fill"></div>
+              </div>
+            </div>
+            <div class="ca-val">88</div>
+          </div>
+          <div class="combat-attr" data-pct="100">
+            <div class="ca-icon">🔥</div>
+            <div class="ca-name">Learning</div>
+            <div class="ca-bar-wrap">
+              <div class="ca-bar">
+                <div class="ca-fill"></div>
+              </div>
+            </div>
+            <div class="ca-val">∞</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ WALL DIVIDER ══ -->
+  <div class="wall-divider">
+    <div class="wd-inner"><span class="wd-text">— WALL SINA —</span></div>
+  </div>
+
+  <!-- ══ SKILLS ══ -->
+  <section id="skills" class="skills-section">
+    <canvas class="section-canvas" id="skillsCanvas"></canvas>
+
+    <div class="sec-header">
+      <div class="sec-eyebrow">⚙ TECH STACK </div>
+      <h2 class="sec-title">SKILLS & TOOLS</h2>
+      <p class="sec-sub">Technologies and tools I use to learn, build, and solve problems.</p>
+    </div>
+
+    <div class="skills-wrap">
+      <!-- Programming -->
+      <div class="skill-block">
+        <div class="sblock-head"><span class="sblock-icon">🗡</span><span>PROGRAMMING LANGUAGES</span>
+          <div class="sblock-line"></div>
+        </div>
+        <div class="skill-grid">
+          <div class="skill-card" data-tip="Primary combat language — the foundation.">
+            <div class="sc-front"><i class="fa-solid fa-c" style="color:#4fc3ff"></i><span>C</span><em>FOUNDATION</em>
+            </div>
+            <div class="sc-back">
+              <div class="sc-back-content">
+                <div class="sc-b-icon"><i class="fa-solid fa-c"></i></div>
+                <div class="sc-b-name">C Language</div>
+                <div class="sc-b-tip">Programming Foundation.</div>
+              </div>
+            </div>
+            <div class="sc-glow" style="--g:#4fc3ff"></div>
+          </div>
+          <div class="skill-card" data-tip="Object-oriented warfare. OOP at its finest.">
+            <div class="sc-front"><i class="fa-solid fa-code"
+                style="color:#00bfff"></i><span>C++</span><em>FOUNDATION</em></div>
+            <div class="sc-back">
+              <div class="sc-back-content">
+                <div class="sc-b-icon"><i class="fa-solid fa-code"></i></div>
+                <div class="sc-b-name">C++</div>
+                <div class="sc-b-tip">Object-Oriented Concepts</div>
+              </div>
+            </div>
+            <div class="sc-glow" style="--g:#00bfff"></div>
+          </div>
+          <div class="skill-card" data-tip="Elite weapon. Spring Boot fortress builder.">
+            <div class="sc-front"><i class="fa-brands fa-java" style="color:#f89820"></i><span>Java</span><em>ELITE</em>
+            </div>
+            <div class="sc-back">
+              <div class="sc-back-content">
+                <div class="sc-b-icon"><i class="fa-brands fa-java"></i></div>
+                <div class="sc-b-name">Java</div>
+                <div class="sc-b-tip">Primary Development Language</div>
+              </div>
+            </div>
+            <div class="sc-glow" style="--g:#f89820"></div>
+          </div>
+          <div class="skill-card" data-tip="Scripting recon — fast data intelligence.">
+            <div class="sc-front"><i class="fa-brands fa-python"
+                style="color:#3776ab"></i><span>Python</span><em>LEARNING</em></div>
+            <div class="sc-back">
+              <div class="sc-back-content">
+                <div class="sc-b-icon"><i class="fa-brands fa-python"></i></div>
+                <div class="sc-b-name">Python</div>
+                <div class="sc-b-tip">Learning & Automation</div>
+              </div>
+            </div>
+            <div class="sc-glow" style="--g:#3776ab"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Web -->
+      <div class="skill-block">
+        <div class="sblock-head"><span class="sblock-icon">🌐</span><span>WEB DEVELOPMENT</span>
+          <div class="sblock-line"></div>
+        </div>
+        <div class="skill-grid">
+          <div class="skill-card">
+            <div class="sc-front"><i class="fa-brands fa-html5"
+                style="color:#e34c26"></i><span>HTML5</span><em>STRUCTURE</em></div>
+            <div class="sc-back">
+              <div class="sc-back-content">
+                <div class="sc-b-icon"><i class="fa-brands fa-html5"></i></div>
+                <div class="sc-b-name">HTML5</div>
+                <div class="sc-b-tip">Web Page Structure</div>
+              </div>
+            </div>
+            <div class="sc-glow" style="--g:#e34c26"></div>
+          </div>
+          <div class="skill-card">
+            <div class="sc-front"><i class="fa-brands fa-css3-alt"
+                style="color:#264de4"></i><span>CSS3</span><em>STYLING</em></div>
+            <div class="sc-back">
+              <div class="sc-back-content">
+                <div class="sc-b-icon"><i class="fa-brands fa-css3-alt"></i></div>
+                <div class="sc-b-name">CSS3</div>
+                <div class="sc-b-tip">UI & Styling</div>
+              </div>
+            </div>
+            <div class="sc-glow" style="--g:#264de4"></div>
+          </div>
+          <div class="skill-card">
+            <div class="sc-front"><i class="fa-brands fa-js"
+                style="color:#f7df1e"></i><span>JavaScript</span><em>LOGIC</em></div>
+            <div class="sc-back">
+              <div class="sc-back-content">
+                <div class="sc-b-icon"><i class="fa-brands fa-js"></i></div>
+                <div class="sc-b-name">JavaScript</div>
+                <div class="sc-b-tip">Interactive Web Logic</div>
+              </div>
+            </div>
+            <div class="sc-glow" style="--g:#f7df1e"></div>
+          </div>
+          <div class="skill-card">
+            <div class="sc-front"><span style="font-size:1.8rem">🌿</span><span>Spring Boot</span><em>BACKEND</em>
+            </div>
+            <div class="sc-back">
+              <div class="sc-back-content">
+                <div class="sc-b-icon">🌿</div>
+                <div class="sc-b-name">Spring Boot</div>
+                <div class="sc-b-tip">Backend Development</div>
+              </div>
+            </div>
+            <div class="sc-glow" style="--g:#6db33f"></div>
+          </div>
+          <div class="skill-card">
+            <div class="sc-front"><span style="font-size:1.8rem">🍃</span><span>Thymeleaf</span><em>TEMPLATES</em></div>
+            <div class="sc-back">
+              <div class="sc-back-content">
+                <div class="sc-b-icon">🍃</div>
+                <div class="sc-b-name">Thymeleaf</div>
+                <div class="sc-b-tip">Dynamic Templates</div>
+              </div>
+            </div>
+            <div class="sc-glow" style="--g:#7fc97f"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Database -->
+      <div class="skill-block">
+        <div class="sblock-head"><span class="sblock-icon">🗄</span><span>DATABASES</span>
+          <div class="sblock-line"></div>
+        </div>
+        <div class="skill-grid">
+          <div class="skill-card">
+            <div class="sc-front"><i class="fa-solid fa-database"
+                style="color:#f48024"></i><span>MySQL</span><em>DATABASE</em></div>
+            <div class="sc-back">
+              <div class="sc-back-content">
+                <div class="sc-b-icon"><i class="fa-solid fa-database"></i></div>
+                <div class="sc-b-name">MySQL</div>
+                <div class="sc-b-tip">Database Management</div>
+              </div>
+            </div>
+            <div class="sc-glow" style="--g:#f48024"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tools -->
+      <div class="skill-block">
+        <div class="sblock-head"><span class="sblock-icon">⚙</span><span>DEVELOPMENT TOOLS</span>
+          <div class="sblock-line"></div>
+        </div>
+        <div class="skill-grid">
+          <div class="skill-card">
+            <div class="sc-front"><i class="fa-solid fa-code" style="color:#007acc"></i><span>VS
+                Code</span><em>COCKPIT</em></div>
+            <div class="sc-back">
+              <div class="sc-back-content">
+                <div class="sc-b-icon"><i class="fa-solid fa-code"></i></div>
+                <div class="sc-b-name">VS Code</div>
+                <div class="sc-b-tip">Code Editor</div>
+              </div>
+            </div>
+            <div class="sc-glow" style="--g:#007acc"></div>
+          </div>
+          <div class="skill-card">
+            <div class="sc-front"><i class="fa-brands fa-git-alt"
+                style="color:#f05032"></i><span>Git</span><em>WIRE</em></div>
+            <div class="sc-back">
+              <div class="sc-back-content">
+                <div class="sc-b-icon"><i class="fa-brands fa-git-alt"></i></div>
+                <div class="sc-b-name">Git</div>
+                <div class="sc-b-tip">Version Control</div>
+              </div>
+            </div>
+            <div class="sc-glow" style="--g:#f05032"></div>
+          </div>
+          <div class="skill-card">
+            <div class="sc-front"><i class="fa-brands fa-github" style="color:#fff"></i><span>GitHub</span><em>HQ</em>
+            </div>
+            <div class="sc-back">
+              <div class="sc-back-content">
+                <div class="sc-b-icon"><i class="fa-brands fa-github"></i></div>
+                <div class="sc-b-name">GitHub</div>
+                <div class="sc-b-tip">Project Hosting</div>
+              </div>
+            </div>
+            <div class="sc-glow" style="--g:#ccc"></div>
+          </div>
+          <div class="skill-card">
+            <div class="sc-front"><i class="fa-brands fa-chrome"
+                style="color:#4285f4"></i><span>DevTools</span><em>RECON</em></div>
+            <div class="sc-back">
+              <div class="sc-back-content">
+                <div class="sc-b-icon"><i class="fa-brands fa-chrome"></i></div>
+                <div class="sc-b-name">DevTools</div>
+                <div class="sc-b-tip">Debug & Testing</div>
+              </div>
+            </div>
+            <div class="sc-glow" style="--g:#4285f4"></div>
+          </div>
+          <div class="skill-card">
+            <div class="sc-front"><i class="fa-solid fa-table-columns" style="color:#f48024"></i><span>MySQL
+                WB</span><em>MAP ROOM</em></div>
+            <div class="sc-back">
+              <div class="sc-back-content">
+                <div class="sc-b-icon"><i class="fa-solid fa-table-columns"></i></div>
+                <div class="sc-b-name">MySQL WB</div>
+                <div class="sc-b-tip">Database Administration</div>
+              </div>
+            </div>
+            <div class="sc-glow" style="--g:#f48024"></div>
+          </div>
+          <div class="skill-card">
+            <div class="sc-front"><i class="fa-brands fa-windows"
+                style="color:#0078d4"></i><span>Windows</span><em>TERRITORY</em></div>
+            <div class="sc-back">
+              <div class="sc-back-content">
+                <div class="sc-b-icon"><i class="fa-brands fa-windows"></i></div>
+                <div class="sc-b-name">Windows</div>
+                <div class="sc-b-tip">Development Environment</div>
+              </div>
+            </div>
+            <div class="sc-glow" style="--g:#0078d4"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ WALL DIVIDER ══ -->
+  <div class="wall-divider">
+    <div class="wd-inner"><span class="wd-text">— WALL MARIA —</span></div>
+  </div>
+
+  <!-- ══ PROJECTS ══ -->
+  <section id="projects" class="projects-section">
+    <canvas class="section-canvas" id="projectsCanvas"></canvas>
+
+    <div class="sec-header">
+      <div class="sec-eyebrow">🗺 FEATURED PROJECTS 🗺 </div>
+      <h2 class="sec-title">PROJECT SHOWCASE</h2>
+      <p class="sec-sub">Projects built through learning, experimentation, and practical problem solving</p>
+    </div>
+
+    <div class="missions-grid">
+      <div class="mission-card" id="mc1">
+        <div class="mc-thunder-bg"></div>
+        <div class="mc-status-bar">
+          <span class="mc-num">PROJECT 01</span>
+          <span class="mc-badge complete">✓ COMPLETED</span>
+        </div>
+        <div class="mc-body">
+          <div class="mc-icon">💰</div>
+          <h3 class="mc-title">Personal Expense Tracking System</h3>
+          <p class="mc-desc">A full-stack expense management application built using Spring Boot and MySQL. The system
+            helps users manage income, expenses, budgets, and spending habits through a secure and user-friendly
+            dashboard with reporting and analytics features.</p>
+          <div class="mc-tags">
+            <span>Java</span><span>Spring Boot</span><span>MySQL</span>
+            <span>Thymeleaf</span><span>MVC</span><span>HTML/CSS/JS</span>
+          </div>
+          <div class="mc-links">
+            <a href="https://github.com/Hacker-Hima/personal-expense-tracking-system" target="_blank" class="mc-link">
+              <i class="fa-brands fa-github"></i> GitHub
+            </a>
+          </div>
+        </div>
+        <div class="mc-corner-decor tl"></div>
+        <div class="mc-corner-decor tr"></div>
+        <div class="mc-corner-decor bl"></div>
+        <div class="mc-corner-decor br"></div>
+      </div>
+
+      <div class="mission-card mission-live" id="mc2">
+        <div class="mc-thunder-bg"></div>
+        <div class="mc-status-bar">
+          <span class="mc-num">PROJECT 02</span>
+          <span class="mc-badge live">◉ LIVE PROJECT</span>
+        </div>
+        <div class="mc-body">
+          <div class="mc-icon">🌐</div>
+          <h3 class="mc-title">Personal Portfolio Website</h3>
+          <p class="mc-desc">A modern responsive portfolio website developed to showcase my projects, skills, education,
+            and technical journey. Built with a focus on clean design, responsiveness, and user experience, and deployed
+            using GitHub Pages..</p>
+          <div class="mc-tags">
+            <span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>GitHub Pages</span>
+          </div>
+          <div class="mc-links">
+            <a href="https://hacker-hima.github.io/Himachalam-portfolio/" target="_blank" class="mc-link">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo
+            </a>
+            <a href="https://github.com/Hacker-Hima" target="_blank" class="mc-link">
+              <i class="fa-brands fa-github"></i> GitHub
+            </a>
+          </div>
+        </div>
+        <div class="mc-corner-decor tl"></div>
+        <div class="mc-corner-decor tr"></div>
+        <div class="mc-corner-decor bl"></div>
+        <div class="mc-corner-decor br"></div>
+      </div>
+
+      <div class="mission-card" id="mc3">
+        <div class="mc-thunder-bg"></div>
+        <div class="mc-status-bar">
+          <span class="mc-num">PROJECT 03</span>
+          <span class="mc-badge complete">✓ COMPLETED</span>
+        </div>
+        <div class="mc-body">
+          <div class="mc-icon">🤖</div>
+          <h3 class="mc-title">AI Interview Practice Platform</h3>
+          <p class="mc-desc">A full-stack AI-powered interview preparation platform built using Spring Boot, MySQL, and
+            Spring Security. Features role-based authentication, mock interview sessions, AI answer evaluation,
+            performance analytics, and an admin-managed question bank.</p>
+          <div class="mc-tags">
+            <span>Java</span><span>Spring Boot</span><span>MySQL</span>
+            <span>Spring Security</span><span>Thymeleaf</span><span>MVC</span><span>HTML/CSS/JS</span><span>Gemini
+              AI</span>
+          </div>
+          <div class="mc-links">
+            <a href="https://github.com/Hacker-Hima/ai-interview-practice-platform" target="_blank" class="mc-link">
+              <i class="fa-brands fa-github"></i> GitHub
+            </a>
+          </div>
+        </div>
+        <div class="mc-corner-decor tl"></div>
+        <div class="mc-corner-decor tr"></div>
+        <div class="mc-corner-decor bl"></div>
+        <div class="mc-corner-decor br"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ WALL DIVIDER ══ -->
+  <div class="wall-divider">
+    <div class="wd-inner"><span class="wd-text"> SHIGANSHINA DISTRICT </span></div>
+  </div>
+
+  <!-- ══ CERTIFICATES ══ -->
+  <section id="certificates" class="certs-section">
+    <canvas class="section-canvas" id="certsCanvas"></canvas>
+
+    <div class="sec-header">
+      <div class="sec-eyebrow">🏅 CERTIFICATIONS 🏅</div>
+      <h2 class="sec-title">CERTIFICATES & ACHIEVEMENTS</h2>
+      <p class="sec-sub">Professional certifications and learning milestones earned through continuous growth and skill
+        development.</p>
+    </div>
+
+    <div class="medals-grid">
+      <div class="medal-card" data-img="images/eng.jpg" data-title="Technical English for Engineers"
+        data-org="NPTEL — IIT Madras" data-score="72%">
+        <div class="medal-inner">
+          <div class="medal-front">
+            <div class="medal-ribbon-wrap">
+              <div class="medal-ribbon"></div>
+            </div>
+            <div class="medal-disc">
+              <div class="medal-emoji">📜</div>
+              <div class="medal-shine"></div>
+            </div>
+            <div class="medal-name">Technical English for Engineers</div>
+            <div class="medal-org">NPTEL — IIT Madras</div>
+            <div class="medal-score">72%</div>
+            <div class="medal-when">Aug–Oct 2024</div>
+            <div class="medal-hint">◉ CLICK TO VIEW</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="medal-card" data-img="images/python.jpg" data-title="Joy of Computing using Python"
+        data-org="NPTEL — IIT Madras" data-score="69%">
+        <div class="medal-inner">
+          <div class="medal-front">
+            <div class="medal-ribbon-wrap">
+              <div class="medal-ribbon" style="background:linear-gradient(180deg,#3776ab,#c8a84b)"></div>
+            </div>
+            <div class="medal-disc">
+              <div class="medal-emoji">🐍</div>
+              <div class="medal-shine"></div>
+            </div>
+            <div class="medal-name">Joy of Computing using Python</div>
+            <div class="medal-org">NPTEL — IIT Madras</div>
+            <div class="medal-score">69%</div>
+            <div class="medal-when">Jan–Apr 2025</div>
+            <div class="medal-hint">◉ CLICK TO VIEW</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="medal-card" data-img="images/iot.jpg" data-title="Introduction to Internet of Things"
+        data-org="NPTEL — IIT Kharagpur" data-score="76%">
+        <div class="medal-inner">
+          <div class="medal-front">
+            <div class="medal-ribbon-wrap">
+              <div class="medal-ribbon" style="background:linear-gradient(180deg,#1a6b6b,#c8a84b)"></div>
+            </div>
+            <div class="medal-disc">
+              <div class="medal-emoji">📡</div>
+              <div class="medal-shine"></div>
+            </div>
+            <div class="medal-name">Introduction to Internet of Things</div>
+            <div class="medal-org">NPTEL — IIT Kharagpur</div>
+            <div class="medal-score">76%</div>
+            <div class="medal-when">Jul–Oct 2025</div>
+            <div class="medal-hint">◉ CLICK TO VIEW</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="medal-card" data-img="images/iiot.jpg"
+        data-title="Introduction to Indust 4.0 & Industrial Internet of Things" data-org="NPTEL — IIT Kharagpur"
+        data-score="80%">
+        <div class="medal-inner">
+          <div class="medal-front">
+            <div class="medal-ribbon-wrap">
+              <div class="medal-ribbon" style="background:linear-gradient(180deg,#f89820,#c8a84b)"></div>
+            </div>
+            <div class="medal-disc">
+              <div class="medal-emoji">☁️</div>
+              <div class="medal-shine"></div>
+            </div>
+            <div class="medal-name">introduction to Indust 4.0 and Industrial Intern of thinking</div>
+            <div class="medal-org">NPTEL — IIT Kharagpur</div>
+            <div class="medal-score">80%</div>
+            <div class="medal-when">Jan-Apr 2026</div>
+            <div class="medal-hint">◉ CLICK TO VIEW</div>
+          </div>
+        </div>
+      </div>
+
+      <!--    <div class="medal-card">
+        <div class="medal-inner">
+          <div class="medal-front">
+            <div class="medal-ribbon-wrap">
+              <div class="medal-ribbon" style="background:linear-gradient(180deg,#f89820,#c8a84b)"></div>
+            </div>
+            <div class="medal-disc">
+              <div class="medal-emoji">☕</div>
+              <div class="medal-shine"></div>
+            </div>
+            <div class="medal-name">Java Programming</div>
+            <div class="medal-org">Certification Program</div>
+            <div class="medal-score">CERTIFIED</div>
+            <div class="medal-when">Java Track</div>
+            <div class="medal-hint">⟳ View Details</div>
+          </div>
+          <div class="medal-back">
+            <img src="images/java.jpg" alt="Java Cert" loading="lazy">
+          </div>
+        </div>
+      </div>
+    -->
+    </div>
+  </section>
+
+  <!-- ══ WALL DIVIDER ══ -->
+  <div class="wall-divider">
+    <div class="wd-inner"><span class="wd-text">— CONTINUOUS LEARNING—</span></div>
+  </div>
+
+  <!-- ══ CONTACT ══ -->
+  <section id="contact" class="contact-section">
+    <canvas class="section-canvas" id="contactCanvas"></canvas>
+
+    <div class="sec-header">
+      <div class="sec-eyebrow">📡 GET IN TOUCH </div>
+      <h2 class="sec-title">LET'S CONNECT</h2>
+      <p class="sec-sub">RInterested in collaborating, discussing opportunities, or simply connecting? Feel free to
+        reach out.</p>
+    </div>
+
+    <div class="contact-grid">
+      <a href="mailto:himapc2007@gmail.com" class="contact-card" data-label="EMAIL DISPATCH">
+        <div class="cc-bg-anim"></div>
+        <div class="cc-icon">✉</div>
+        <div class="cc-label">EMAIL</div>
+        <div class="cc-val">himapc2007@gmail.com</div>
+        <div class="cc-arrow">→</div>
+      </a>
+      <a href="https://github.com/Hacker-Hima" target="_blank" class="contact-card" data-label="FIELD ARCHIVE">
+        <div class="cc-bg-anim"></div>
+        <div class="cc-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1.8rem"
+            height="1.8rem">
+            <path
+              d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
+          </svg>
+        </div>
+        <div class="cc-label">FIELD</div>
+        <div class="cc-val">Hacker-Hima</div>
+        <div class="cc-arrow">→</div>
+      </a>
+      <a href="https://www.linkedin.com/in/himachalam-c-535153327/" target="_blank" class="contact-card"
+        data-label="CORPS NETWORK">
+        <div class="cc-bg-anim"></div>
+        <div class="cc-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1.8rem"
+            height="1.8rem">
+            <path
+              d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+          </svg>
+        </div>
+        <div class="cc-label">LINKEDIN</div>
+        <div class="cc-val">himachalam-c</div>
+        <div class="cc-arrow">→</div>
+      </a>
+      <a href="https://hacker-hima.github.io/Himachalam-portfolio/" target="_blank" class="contact-card"
+        data-label="LIVE OUTPOST">
+        <div class="cc-bg-anim"></div>
+        <div class="cc-icon">🌐</div>
+        <div class="cc-label">LIVE WEBSITE</div>
+        <div class="cc-val">Portfolio Live</div>
+        <div class="cc-arrow">→</div>
+      </a>
+      <div class="contact-card no-link" data-label="LOCATION">
+        <div class="cc-bg-anim"></div>
+        <div class="cc-icon">📍</div>
+        <div class="cc-label">LOCATION</div>
+        <div class="cc-val">Tamil Nadu, India</div>
+        <div class="cc-arrow">·</div>
+      </div>
+    </div>
+
+    <div class="open-signal">
+      <div class="signal-pulse"></div>
+      <span>OPEN TO INTERNSHIPS &amp; • PROJECTS • COLLABORATIONS </span>
+      <span class="fist-salute">✊</span>
+      <span>DEDICATE YOUR HEART</span>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-wings">
+      <svg viewBox="0 0 100 45" xmlns="http://www.w3.org/2000/svg">
+        <path d="M50,22 C38,10 18,7 10,17 C20,13 33,19 43,26 C32,21 20,26 18,35 C26,28 38,27 47,32 Z" fill="#c8a84b"
+          opacity="0.45" />
+        <path d="M50,22 C62,10 82,7 90,17 C80,13 67,19 57,26 C68,21 80,26 82,35 C74,28 62,27 53,32 Z" fill="#c8a84b"
+          opacity="0.45" />
+      </svg>
+    </div>
+    <p>© 2026 <strong>Himachalam C</strong> &nbsp;·&nbsp; Software Developer</p>
+    <p class="footer-tagline">Designed & Developed by Himachalam C with ✊ Dedication</p>
+  </footer>
+
+  <!-- ══ CERT LIGHTBOX MODAL ══ -->
+  <div class="cert-lightbox" id="certLightbox" role="dialog" aria-modal="true">
+    <div class="clb-panel" id="clbPanel">
+      <!-- Corner accents -->
+      <div class="clb-corner tl"></div>
+      <div class="clb-corner tr"></div>
+      <div class="clb-corner bl"></div>
+      <div class="clb-corner br"></div>
+
+      <!-- Close -->
+      <button class="clb-close" id="clbClose" aria-label="Close">✕</button>
+
+      <!-- Header label -->
+      <div class="clb-header">
+        <span id="clbHeaderLabel">CERTIFICATION RECORD</span>
+        <div class="clb-header-line"></div>
+      </div>
+
+      <!-- Certificate image -->
+      <div class="clb-img-wrap">
+        <div class="clb-scan"></div>
+        <img id="clbImg" src="" alt="Certificate" loading="lazy">
+      </div>
+
+      <!-- Info footer -->
+      <div class="clb-info">
+        <div>
+          <div class="clb-title" id="clbTitle">—</div>
+          <div class="clb-org" id="clbOrg">—</div>
+        </div>
+        <div class="clb-score-badge" id="clbScore">—</div>
+      </div>
+
+      <!-- ESC hint -->
+      <div class="clb-esc">[ PRESS ESC OR CLICK OUTSIDE TO CLOSE ]</div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
